@@ -14,7 +14,6 @@ templates = Jinja2Templates(directory="templates")
 produto_repo.criar_tabela()
 cliente_repo.criar_tabela()
 
-
 @app.get("/")
 async def get_root():
     produtos = produto_repo.obter_todos()
@@ -26,6 +25,12 @@ async def get_root():
 async def get_clientes():
     clientes = cliente_repo.obter_todos()
     response = templates.TemplateResponse("clientes.html", {"request": {}, "clientes": clientes})
+    return response
+
+@app.get("/produtos")
+async def get_produtos():
+    produtos = produto_repo.obter_todos()
+    response = templates.TemplateResponse("produtos.html", {"request": {}, "produtos": produtos})
     return response
 
 
